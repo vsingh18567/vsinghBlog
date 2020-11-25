@@ -1,0 +1,6 @@
+<h1>{{ post.title }}</h1>
+<small>By: {{post.author.first_name}} {{post.author.last_name}} </small>
+<br>
+{{post.body}}
+<br>
+<a href="{% url 'blog-home' %}">Back</a>
