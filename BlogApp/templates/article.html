@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% block title %} {{post.title}} {% endblock %}
 {% block content %}
-<h1>{{ post.title }}</h1>
-<small>By: {{post.author.first_name}} {{post.author.last_name}} </small>
-<br>
+<h2>{{ post.title }}</h2>
+<small>By: {{post.author.first_name}} {{post.author.last_name}} on {{post.date}}</small>
+<br><br>
 {{post.body}}
-<br>
-<a href="{% url 'blog-home' %}" class="btn btn-primary stretched-link">Back</a>
+<br><br><br>
+<a href="{% url 'edit-post' post.pk %}" class="btn btn-primary btn-sm">Edit</a>  <a href="{% url 'delete-post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>  <a href="{% url 'blog-home' %}" class="btn btn-secondary btn-sm">Back</a>
 {% endblock content %}

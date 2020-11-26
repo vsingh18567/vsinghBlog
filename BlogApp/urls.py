@@ -18,5 +18,8 @@ from .views import *
 
 urlpatterns = [
     path('', Home.as_view(), name='blog-home'),
-    path('article/<int:pk>', Article.as_view(), name='article-page') # primary key
+    path('article/<int:pk>', Article.as_view(), name='article-page'), # primary key
+    path('add_post', AddPost.as_view(), name='add-post'),
+    path('article/edit/<int:pk>', EditPost.as_view(), name='edit-post'),
+    path('article/delete/<int:pk>', DeletePost.as_view(), name='delete-post')
 ]
