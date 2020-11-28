@@ -3,6 +3,7 @@ from .models import Post
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import *
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 # Create your views here.
 class Home(ListView):
@@ -21,12 +22,18 @@ class AddPost(CreateView):
     # fields = '__all__'
     # fields = ('author', 'title', 'body')
 
-class EditPost(UpdateView):
+class EditPost(UserPassesTestMixin, UpdateView):
     model = Post
     form_class = EditForm
     template_name = 'edit_post.html'
 
-class DeletePost(DeleteView):
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
+
+class DeletePost(UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('blog-home')
+
+    def test_func(self):
+        return self.get_object().author.id == self.request.user.id
